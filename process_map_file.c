@@ -3,9 +3,9 @@ int check_file_extension(char *filename, char *extension)
 {
 	size_t len_filename;
     size_t len_extension;
-    len_filename = ft_strlen(filename);
+    
+	len_filename = ft_strlen(filename);
     len_extension = ft_strlen(extension);
-
 	if (len_filename < len_extension)
 	{
 		perror("Fichero no válido");

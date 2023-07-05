@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-int handle_keys(in *fw, char key)
+int	handle_keys(in *fw, char key)
 {	
 	int coordX;
 	int coordY;
@@ -18,9 +18,8 @@ int handle_keys(in *fw, char key)
 	return (check_move(fw, coordX, coordY));
 }
 
-int check_move(in *fw, int coordX, int coordY)
+int	check_move(in *fw, int coordX, int coordY)
 {
-	//ft_printf("\nVALOR DE LA SIGUIENTE CASILLA: %c\n",fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX]);//  DEBUG
 	if (fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] != '1')
 	{
 		if (fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == 'C'){
@@ -35,13 +34,13 @@ int check_move(in *fw, int coordX, int coordY)
 			handle_move(fw, fw->player, coordX, coordY);
 			fw->map->moves += 1;
 			ft_printf(BLUE"\nNúmero de movimientos "RED"%i\n"BLUE"Coins "RED"%i"GREEN"/"RED"%i\n"DEFAULT, fw->map->moves, fw->map->coins_gained, fw->map->coins);
-			return (0);
+			return(0);
 		}
 	}
 	return(1);
 }
 
-int check_e(in *fw){
+int	check_e(in *fw){
 	if (fw->player->y == fw->map->exit_y && fw->player->x == fw->map->exit_x)
 	{
 		ft_printf(GREEN"\n¡Has completado el nivel, gracias por jugar!\n"DEFAULT);

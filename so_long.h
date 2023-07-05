@@ -75,6 +75,9 @@ int dfs(int row, int col, int **visited, in *fw);
 /*FUNCIONES DE GESTION DE GRÁFICOS*/
 void free_map_struct(in *fw);
 int mlx_process(in *fw);
+void set_image_ptr(in *fw, int y, int x, void **image_ptr);
+void copy_image_data(int *buffer_data, int *image_data, int cell_width, int cell_height);
+void process_buffer_data(in *fw, int *buffer_data);
 void put_imgs(in *fw);
 int key_hook(int keycode, in *fw);
 int loop_hook(in *fw);// PROBANDO
@@ -92,7 +95,7 @@ int handle_keys(in *fw, char key);
 int check_move(in *fw, int coordX, int coordY);
 void init_player(in *fw, entity *entity, int coordx, int coordy);
 char convert_keycode_to_letter(int keycode);
-char* put_values(char *cadena, entity *entity);
+char *put_values(char *cadena, entity *entity);
 char get_low(char letter);
 int is_entity(in *fw, int y, int x, int first_time);
 void put_item_to_buffer(in *fw, int *buffer_data, int y, int x);

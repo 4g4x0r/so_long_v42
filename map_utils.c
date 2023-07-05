@@ -1,50 +1,58 @@
 #include "so_long.h"
 
-void check_argc(int argc)
+void 	check_argc(int argc)
 {
-	if (argc < 2)
-	{
-		perror("No hay argumentos");
-		exit(1);	
-	}
+    if (argc < 2)
+    {
+        perror("No hay argumentos");
+        exit(1);
+    }
 }
-int check_line(char *buffer, int *i, in *fw)
+
+int	check_line(char *buffer, int *i, in *fw)
 {
-	static int e;
-	buffer[*i] = '\0';
+    static int e;
+
+    buffer[*i] = '\0';
     map_validator(buffer, fw);
-	fw->map->mapstruct[e] = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
-	ft_strlcpy(fw->map->mapstruct[e], buffer, ft_strlen(buffer) + 1);
-	ft_printf(GREEN"%s\n"DEFAULT, fw->map->mapstruct[e]);
-	e++;
+    fw->map->mapstruct[e] = (char *)malloc(sizeof(char) * (ft_strlen(buffer) + 1));
+    ft_strlcpy(fw->map->mapstruct[e], buffer, ft_strlen(buffer) + 1);
+    ft_printf(GREEN"%s\n"DEFAULT, fw->map->mapstruct[e]);
+    e++;
     *i = 0;
-    return 0;
+    return(0);
 }
-int first_line_analyzer(char *buffer, in *fw)
+
+int	first_line_analyzer(char *buffer, in *fw)
 {
-	fw->map->columns = (ft_strlen(buffer));
 	int a;
+	
+	fw->map->columns = ft_strlen(buffer);
 	a = 0;
 	while (buffer[a] != '\0')
 	{
 		if (buffer[a] != '1' )
 		{
-			perror("Primera línea sin cerrar");
+			perror("Unclosed first line");
 			exit(1);
 		}
 		a++;
 	}
-	if (a < 4)
+	
+	if (a < 3)
 	{
-		perror("Mapa demasiado pequeño");
+		perror("Map too small");
 		exit(1);
 	}
+	
 	return(0);
 }
-int body_line_analyzer(char *buffer, in *fw)
+
+int	body_line_analyzer(char *buffer, in *fw)
 {
 	int a;
 	static int e;
+
 	a = 0;
 	//ft_printf("\nen body_line_analyzer el buffer mide %i y el modelo a seguir %i\n", ft_strlen(buffer), c->columns);
 	if (ft_strlen(buffer) != (size_t)fw->map->columns || buffer[a] != '1' || buffer[(fw->map->columns - 1)] != '1')
@@ -62,7 +70,7 @@ int body_line_analyzer(char *buffer, in *fw)
 	e++;
 	return(0);
 }
-int search_items(char item, in *fw)
+int	search_items(char item, in *fw)
 {
 	if (item == 'C')
 		fw->map->coins = fw->map->coins + 1;
