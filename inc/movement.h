@@ -1,9 +1,10 @@
-#ifndef SO_LONG_H
-#define SO_LONG_H
+#ifndef MOVEMENT_H
+#define MOVEMENT_H
 
-#include <mlx.h>
-#include "./src/libft/libft.h"
-#include "./inc/colors.h"
+#include "../so_long.h"
+#include "colors.h"
+#include "map.h"
+#include <../mlx.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -11,7 +12,6 @@
 #include <X11/Xlib.h>//Utilizada para la gestion del multihilo.
 #define BUFFER_SIZE 5000
 #define BPP 64
-// STRUCTS
 typedef struct s_map{
 	char *map_name;
 	int	lines;
@@ -49,30 +49,12 @@ typedef struct s_entity{
 	char value;
 }				t_entity;
 
+
 typedef struct s_in{
 	t_map *map;
 	t_entity *player;
 }				t_in;
 
-
-/*FUNCIONES PRINTF*/
-int	ft_printf(const char *fmt, ...);
-/*FUNCIONES DE MAPA*/
-void check_argc(int argc);
-int check_file_extension(char *filename, char *extension);
-int process_map_file(t_in *fw);
-int line_counter(int fd);
-int process_line(int fd, t_in *fw);
-int check_line(char *buffer, int *i, t_in *fw);
-int map_validator(char *buffer, t_in *fw);
-int first_line_analyzer(char *buffer, t_in *fw);
-int body_line_analyzer(char *buffer, t_in *fw);
-void search_entitys(t_in *fw, char letter, int e, int num);
-int last_line_analyzer(char *buffer, t_in *fw);
-int search_items(char item, t_in *fw);
-int path_finder(t_in *fw);
-int dfs(int row, int col, int **visited, t_in *fw);
-/*FUNCIONES DE GESTION DE GRÁFICOS*/
 void free_map_struct(t_in *fw);
 int mlx_process(t_in *fw);
 void set_image_ptr(t_in *fw, int y, int x, void **image_ptr);
@@ -88,15 +70,5 @@ char *get_direction_static(t_entity *entity, int coordx, int coordy);
 int draw_character(t_in *fw, t_entity *entity, int coordx, int coordy);
 int close_window_event(t_in *fw);
 int expose_window_event(t_in *fw);
-/*FUNCIONES DE GESTION DE MOVIMIENTOS*/
-int check_e(t_in *fw);
-void handle_move(t_in *fw, t_entity *entity, int coordx, int coordy);
-int handle_keys(t_in *fw, char key);
-int check_move(t_in *fw, int coordX, int coordY);
-void init_player(t_in *fw, t_entity *entity, int coordx, int coordy);
-char convert_keycode_to_letter(int keycode);
-char *put_values(char *cadena, t_entity *entity);
-char get_low(char letter);
-int is_entity(t_in *fw, int y, int x, int first_time);
-void put_item_to_buffer(t_in *fw, int *buffer_data, int y, int x);
+
 #endif

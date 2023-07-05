@@ -1,4 +1,5 @@
 #include "so_long.h"
+
 int get_pixel_color(void *img_ptr, int x, int y)
 {
 	int bpp;

@@ -9,14 +9,17 @@ int	loop_hook(t_in *fw)
 void	check_coins(t_in *fw)
 {
 	if (fw->map->coins_gained >= fw->map->coins){
-		fw->map->exit_ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/exit_open.xpm", &fw->map->width, &fw->map->height);
-		mlx_put_image_to_window(fw->map->mlx, fw->map->mlx_win, fw->map->exit_ptr, fw->map->exit_x * BPP, fw->map->exit_y * BPP);
+		fw->map->exit_ptr = mlx_xpm_file_to_image(fw->map->mlx,
+		"sprites/exit_open.xpm", &fw->map->width, &fw->map->height);
+		mlx_put_image_to_window(fw->map->mlx, fw->map->mlx_win, fw->map->exit_ptr,
+		fw->map->exit_x * BPP, fw->map->exit_y * BPP);
 	}
 }
 
 int	draw_character(t_in *fw, t_entity *entity, int coordx, int coordy)
 {
-	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx, get_direction_static(entity, coordx, coordy), &fw->map->width, &fw->map->height);
+	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx,get_direction_static(entity, coordx,
+	coordy), &fw->map->width, &fw->map->height);
 	return(0);
 }
 
@@ -66,7 +69,8 @@ void	put_imgs(t_in *fw)
 	int endian;
 	int *buffer_data;
 	
-	buffer_image = mlx_new_image(fw->map->mlx, fw->map->columns * BPP, fw->map->lines * BPP);
+	buffer_image = mlx_new_image(fw->map->mlx, fw->map->columns * BPP,
+	fw->map->lines * BPP);
 	buffer_data = (int *)mlx_get_data_addr(buffer_image, &bpp, &size_line, &endian);
 	process_buffer_data(fw, buffer_data);
 	mlx_put_image_to_window(fw->map->mlx, fw->map->mlx_win, buffer_image, 0, 0);

@@ -105,7 +105,6 @@ char	convert_keycode_to_letter(int keycode)
 		return '\0';  // Null value to indicate an error
 }
 
-
 int	is_entity(t_in *fw, int y, int x, int first_time)
 {
 	if (fw->map->mapstruct[y][x] == 'P' && first_time == 2)

@@ -1,4 +1,5 @@
 #include "so_long.h"
+
 int check_file_extension(char *filename, char *extension)
 {
 	size_t len_filename;
@@ -72,7 +73,6 @@ int map_validator(char *buffer, t_in *fw)
 	}
 	return(0);
 }
-
 int process_line(int fd, t_in *fw)
 {
 	char buffer[BUFFER_SIZE];

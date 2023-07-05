@@ -60,7 +60,8 @@ void	handle_move(t_in *fw, t_entity *entity, int coordx, int coordy){
 	init_player(fw, entity, coordx, coordy);
 	entity->x += coordx;
 	entity->y += coordy;
-	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx, get_direction_static(entity, coordx, coordy), &fw->map->width, &fw->map->height);//CARGA LA DIRECCION ESTATICA DEL JUGADOR.
+	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx,
+	get_direction_static(entity, coordx,coordy),&fw->map->width, &fw->map->height);//CARGA LA DIRECCION ESTATICA DEL JUGADOR.
 	mlx_do_sync(fw->map->mlx);
 	check_e(fw);
 }
