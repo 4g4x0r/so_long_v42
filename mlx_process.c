@@ -10,7 +10,7 @@ int mlx_process(in *fw)
 	fw->map->moves = 0;
 	fw->map->coins_gained = 0;
 	//ft_printf("\n\nESTE ES EL VALOR DE WIDTH MOVE; %i\n", fw->count->widthmove);//	DEBUG
-	handlemove(fw, fw->player, 0, 0);
+	handle_move(fw, fw->player, 0, 0);
 	return (0);
 }
 
@@ -58,18 +58,18 @@ int key_hook(int keycode, in *fw)
 	if (keycode == 65307)
 	{
 		ft_printf(YELLOW"\nHas pulsado la tecla "RED"ESC"DEFAULT" ...\n"MAGENTA"Cerrando el juego.\n"DEFAULT);
-		free_mapstruct(fw);
+		free_map_struct(fw);
 	}
-	char letra = convertirKeyCodeALetra(keycode);
+	char letra = convert_keycode_to_letter(keycode);
 	ft_printf(YELLOW"\nHas pulsado la tecla %c!"DEFAULT, letra);
 	if (keycode == 0x61 || keycode == 0x41 || keycode == 0) // tecla a o A ¡EL ULTIMO ES PARA MAC!.
-		handlekeys(fw, 'a');
+		handle_keys(fw, 'a');
 	else if (keycode == 0x73 || keycode == 0x53 || keycode == 1) // tecla s o S
-		handlekeys(fw, 's');
+		handle_keys(fw, 's');
 	else if (keycode == 0x64 || keycode == 0x44 || keycode == 2) // tecla d o D
-		handlekeys(fw, 'd');
+		handle_keys(fw, 'd');
 	else if (keycode == 0x77 || keycode == 0x57 || keycode == 13) // tecla w o W
-		handlekeys(fw, 'w');
+		handle_keys(fw, 'w');
 	else
 	{
 		ft_printf(RED"\n¡Tecla inválida!"DEFAULT);
@@ -78,7 +78,7 @@ int key_hook(int keycode, in *fw)
 	return (0);
 }
 
-char convertirKeyCodeALetra(int keycode) {
+char convert_keycode_to_letter(int keycode) {
 	
 	if (keycode >= 65 && keycode <= 90)
         return (char)keycode;  // Códigos ASCII para letras mayúsculas

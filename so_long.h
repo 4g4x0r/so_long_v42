@@ -4,20 +4,13 @@
 #include <mlx.h>
 #include "./src/libft/libft.h"
 #include "colors.h"
-
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdlib.h>
 #include <errno.h>
-#include <pthread.h>
 #include <X11/Xlib.h>//Utilizada para la gestion del multihilo.
 #define BUFFER_SIZE 5000
-#define FRAMES_PER_CHANGE 60
 #define BPP 64
-// Variables globales
-extern clock_t lastKeyPressTime;
-extern const int MIN_DELAY;
 // STRUCTS
 typedef struct{
 	char *map_name;
@@ -80,25 +73,25 @@ int search_items(char item, in *fw);
 int path_finder(in *fw);
 int dfs(int row, int col, int **visited, in *fw);
 /*FUNCIONES DE GESTION DE GRÁFICOS*/
+void free_map_struct(in *fw);
 int mlx_process(in *fw);
 void put_imgs(in *fw);
 int key_hook(int keycode, in *fw);
-void free_mapstruct(in *fw);
 int loop_hook(in *fw);// PROBANDO
 void check_coins(in *fw);
 void draw_image(in *fw, void *img_ptr, int start_x, int start_y);
 int get_pixel_color(void *img_ptr, int x, int y);
-char *getdirectionstatic(entity *entity, int coordx, int coordy);
-int drawcharacter(in *fw, entity *entity, int coordx, int coordy);
+char *get_direction_static(entity *entity, int coordx, int coordy);
+int draw_character(in *fw, entity *entity, int coordx, int coordy);
 int close_window_event(in *fw);
 int expose_window_event(in *fw);
 /*FUNCIONES DE GESTION DE MOVIMIENTOS*/
 int check_e(in *fw);
-void handlemove(in *fw, entity *entity, int coordx, int coordy);
-int handlekeys(in *fw, char key);
+void handle_move(in *fw, entity *entity, int coordx, int coordy);
+int handle_keys(in *fw, char key);
 int check_move(in *fw, int coordX, int coordY);
-void initplayer(in *fw, entity *entity, int coordx, int coordy);
-char convertirKeyCodeALetra(int keycode);
+void init_player(in *fw, entity *entity, int coordx, int coordy);
+char convert_keycode_to_letter(int keycode);
 char* put_values(char *cadena, entity *entity);
 char get_low(char letter);
 int is_entity(in *fw, int y, int x, int first_time);

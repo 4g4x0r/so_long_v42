@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-int handlekeys(in *fw, char key)
+int handle_keys(in *fw, char key)
 {	
 	int coordX;
 	int coordY;
@@ -32,7 +32,7 @@ int check_move(in *fw, int coordX, int coordY)
 	    ((fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == 'E') && 
 	    (fw->map->coins_gained == fw->map->coins)))
 		{
-			handlemove(fw, fw->player, coordX, coordY);
+			handle_move(fw, fw->player, coordX, coordY);
 			fw->map->moves += 1;
 			ft_printf(BLUE"\nNúmero de movimientos "RED"%i\n"BLUE"Coins "RED"%i"GREEN"/"RED"%i\n"DEFAULT, fw->map->moves, fw->map->coins_gained, fw->map->coins);
 			return (0);
@@ -51,7 +51,7 @@ int check_e(in *fw){
 		mlx_destroy_image(fw->map->mlx, fw->map->coin_ptr);
 		mlx_destroy_image(fw->map->mlx, fw->map->exit_ptr);
 		mlx_destroy_window(fw->map->mlx, fw->map->mlx_win);
-		free_mapstruct(fw);
+		free_map_struct(fw);
 		exit(0);
 	}
 	return(0);

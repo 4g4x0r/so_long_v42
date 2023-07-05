@@ -14,19 +14,19 @@ void	check_coins(in *fw)
 	}
 }
 
-int	drawcharacter(in *fw, entity *entity, int	coordx, int	coordy) {
+int	draw_character(in *fw, entity *entity, int	coordx, int	coordy) {
 	entity->stepanimation++;
 	if (entity->stepanimation == 2)
-		entity->ptr = mlx_xpm_file_to_image(fw->map->mlx, getdirectionstatic(entity, coordx, coordy), &fw->map->width, &fw->map->height);
+		entity->ptr = mlx_xpm_file_to_image(fw->map->mlx, get_direction_static(entity, coordx, coordy), &fw->map->width, &fw->map->height);
 	else if (entity->stepanimation == 4)
 	{
-		entity->ptr = mlx_xpm_file_to_image(fw->map->mlx, getdirectionstatic(entity, coordx, coordy), &fw->map->width, &fw->map->height);
+		entity->ptr = mlx_xpm_file_to_image(fw->map->mlx, get_direction_static(entity, coordx, coordy), &fw->map->width, &fw->map->height);
 		entity->stepanimation = 0;
 	}
 	return (entity->stepanimation);
 }
 
-void free_mapstruct(in *fw)
+void free_map_struct(in *fw)
 {
 	int i = 0;
 	while (i <= fw->map->lines)
