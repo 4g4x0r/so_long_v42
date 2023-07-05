@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-int	handle_keys(in *fw, char key)
+int	handle_keys(t_in *fw, char key)
 {	
 	int coordX;
 	int coordY;
@@ -18,7 +18,7 @@ int	handle_keys(in *fw, char key)
 	return (check_move(fw, coordX, coordY));
 }
 
-int	check_move(in *fw, int coordX, int coordY)
+int	check_move(t_in *fw, int coordX, int coordY)
 {
 	if (fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] != '1')
 	{
@@ -26,21 +26,23 @@ int	check_move(in *fw, int coordX, int coordY)
 			fw->map->coins_gained += 1;
 			check_coins(fw);
 		}
-	if ((fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == '0') || 
-	    (fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == 'C') ||
-	    ((fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == 'E') && 
-	    (fw->map->coins_gained == fw->map->coins)))
+	if ((fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == '0')
+	|| (fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == 'C')
+	|| ((fw->map->mapstruct[fw->player->y + coordY][fw->player->x + coordX] == 'E')
+	&& (fw->map->coins_gained == fw->map->coins)))
 		{
 			handle_move(fw, fw->player, coordX, coordY);
 			fw->map->moves += 1;
-			ft_printf(BLUE"\nNúmero de movimientos "RED"%i\n"BLUE"Coins "RED"%i"GREEN"/"RED"%i\n"DEFAULT, fw->map->moves, fw->map->coins_gained, fw->map->coins);
+			ft_printf(BLUE"\nNumber of movements "RED"%i\n"BLUE"Coins "RED"%i"
+			GREEN"/"RED"%i\n"
+			DEFAULT, fw->map->moves, fw->map->coins_gained, fw->map->coins);
 			return(0);
 		}
 	}
 	return(1);
 }
 
-int	check_e(in *fw){
+int	check_e(t_in *fw){
 	if (fw->player->y == fw->map->exit_y && fw->player->x == fw->map->exit_x)
 	{
 		ft_printf(GREEN"\n¡Has completado el nivel, gracias por jugar!\n"DEFAULT);
