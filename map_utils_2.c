@@ -91,3 +91,15 @@ void	search_entitys(t_in *fw, char	letter, int	e, int	num)
 			fw->player->x = num;
 		}
 }
+
+int	is_entity(t_in *fw, int y, int x, int first_time)
+{
+	if (fw->map->mapstruct[y][x] == 'P' && first_time == 2)
+	{
+		mlx_put_image_to_window(fw->map->mlx, fw->map->mlx_win,
+		fw->map->floor_ptr, x * BPP, y * BPP);
+		draw_image(fw, fw->player->ptr, fw->player->x * BPP, fw->player->y * BPP);
+		return 1;
+	}
+	return 0;
+}

@@ -44,16 +44,31 @@ void    draw_image(t_in *fw, void *img_ptr, int start_x, int start_y)
 
 int     close_window_event(t_in *fw)
 {
-	printf("\nClosing the game...\n");
-	mlx_destroy_display(fw->map->mlx);
+	printf(RED"\nClosing the game...\n"DEFAULT);
+	free_map_struct(fw);
 	exit(0);  // Salir del programa
 }
 
-int     expose_window_event(t_in *fw)
+int	expose_window_event(t_in *fw)
 {
+	static int i;
+
 	if (fw)
 	{
-		printf("El tamaño de este juego no es modificable.\n");
+		if (i != 0)
+		{
+			printf(RED"The size of this game is not modifiable.\n"DEFAULT);
+			free_map_struct(fw);
+			exit(1);
+		}
+		i++;
 	}
 	return 0;
+}
+
+int	draw_character(t_in *fw, t_entity *entity, int coordx, int coordy)
+{
+	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx,get_direction_static(entity, coordx,
+	coordy), &fw->map->width, &fw->map->height);
+	return(0);
 }

@@ -71,11 +71,7 @@ void	put_item_to_buffer(t_in *fw, int *buffer_data, int y, int x)
 int	key_hook(int keycode, t_in *fw)
 {
 	if (keycode == 65307)
-	{
-		ft_printf(YELLOW"\nYou pressed the "RED"ESC"DEFAULT" key...\n"
-		MAGENTA"Closing the game.\n"DEFAULT);
-		free_map_struct(fw);
-	}
+		close_window_event(fw);
 	char letter;
 	letter = convert_keycode_to_letter(keycode);
 	ft_printf(YELLOW"\nYou pressed the %c key!"DEFAULT, letter);
@@ -103,16 +99,4 @@ char	convert_keycode_to_letter(int keycode)
 		return (char)(keycode - 32);  // ASCII codes for lowercase letters, converted to uppercase
 	else
 		return '\0';  // Null value to indicate an error
-}
-
-int	is_entity(t_in *fw, int y, int x, int first_time)
-{
-	if (fw->map->mapstruct[y][x] == 'P' && first_time == 2)
-	{
-		mlx_put_image_to_window(fw->map->mlx, fw->map->mlx_win,
-		fw->map->floor_ptr, x * BPP, y * BPP);
-		draw_image(fw, fw->player->ptr, fw->player->x * BPP, fw->player->y * BPP);
-		return 1;
-	}
-	return 0;
 }

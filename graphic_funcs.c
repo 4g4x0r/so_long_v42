@@ -16,14 +16,6 @@ void	check_coins(t_in *fw)
 	}
 }
 
-int	draw_character(t_in *fw, t_entity *entity, int coordx, int coordy)
-{
-	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx,get_direction_static(entity, coordx,
-	coordy), &fw->map->width, &fw->map->height);
-	return(0);
-}
-
-
 void	free_map_struct(t_in *fw)
 {
 	int i;
@@ -40,7 +32,6 @@ void	free_map_struct(t_in *fw)
 	mlx_destroy_display(fw->map->mlx);
 	exit(1);
 }
-
 
 void	process_buffer_data(t_in *fw, int *buffer_data)
 {
