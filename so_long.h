@@ -3,6 +3,7 @@
 
 #include <mlx.h>
 #include "./src/libft/libft.h"
+#include "./src/printf/ft_printf.h"
 #include "./inc/colors.h"
 #include <stdio.h>
 #include <unistd.h>
@@ -54,9 +55,6 @@ typedef struct s_in{
 	t_entity *player;
 }				t_in;
 
-
-/*FUNCIONES PRINTF*/
-int	ft_printf(const char *fmt, ...);
 /*FUNCIONES DE MAPA*/
 void check_argc(int argc);
 int check_file_extension(char *filename, char *extension);
