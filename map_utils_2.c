@@ -28,6 +28,7 @@ int	last_line_analyzer(char *buffer, t_in *fw)
 int	path_finder(t_in *fw)
 {
 	int i;
+	int pathExists;
 
 	i = 0;
 	int **visited = (int **)ft_calloc(fw->map->lines, sizeof(int *));
@@ -37,7 +38,7 @@ int	path_finder(t_in *fw)
 		i++;
 	}
 
-	int pathExists = dfs(fw->player->y, fw->player->x, visited, fw);
+	pathExists = dfs(fw->player->y, fw->player->x, visited, fw);
 
 	if (pathExists)
 		printf(GREEN"\nThere is a possible path from "YELLOW"'P'"
@@ -47,11 +48,17 @@ int	path_finder(t_in *fw)
 		RED" to "YELLOW"'E'"GREEN".\n"DEFAULT);
 
 	i = 0;
+	while (i < fw->map->lines)
+	{
+		free(visited[i]);
+		i++;
+	}
 	free(visited);
 	visited = NULL; // Poner el puntero a NULL
 
 	return(pathExists);
 }
+
 
 int dfs(int row, int col, int **visited, t_in *fw)
 {

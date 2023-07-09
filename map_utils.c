@@ -58,7 +58,7 @@ int	body_line_analyzer(char *buffer, t_in *fw)
 	if (ft_strlen(buffer) != (size_t)fw->map->columns || buffer[a] != '1' ||
 	buffer[(fw->map->columns - 1)] != '1')
 	{
-		perror("inconsistent map");
+		perror("Inconsistent map");
 		exit(1);
 	}
 	a++;

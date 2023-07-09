@@ -29,7 +29,11 @@ void	free_map_struct(t_in *fw)
 		}
 		i++;
 	}
-	mlx_destroy_display(fw->map->mlx);
+	free(fw->map->mapstruct);
+	//! Solo queda un Leak que aun no he solucionado.
+	//mlx_destroy_image(fw->map->mlx, fw->player->ptr);
+	//mlx_destroy_window(fw->map->mlx, fw->map->mlx_win);
+	//mlx_destroy_display(fw->map->mlx);
 	exit(1);
 }
 

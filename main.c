@@ -2,6 +2,7 @@
 
 int main(int argc, char **argv)
 {
+	//system("sudo leaks so_long");
 	t_map c;
 	t_entity player;
 	t_in fw; // Framework
@@ -17,7 +18,7 @@ int main(int argc, char **argv)
 
 	fw.map->mlx = mlx_init();
 	fw.map->mlx_win = mlx_new_window(fw.map->mlx, fw.map->columns * BPP,
-	fw.map->lines * BPP, "Pokémon Adventures");
+	fw.map->lines * BPP, "Pokemon Adventures");
 
 	mlx_process(&fw);
 	mlx_key_hook(c.mlx_win, key_hook, &fw);
@@ -25,6 +26,6 @@ int main(int argc, char **argv)
 	mlx_expose_hook(fw.map->mlx_win, expose_window_event, &fw);
 	mlx_loop_hook(c.mlx, loop_hook, &fw);
 	mlx_loop(fw.map->mlx);
-
+	//system("sudo leaks so_long");
 	return 0;
 }

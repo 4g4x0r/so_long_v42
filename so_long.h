@@ -1,7 +1,7 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#include <mlx.h>
+#include "./mlx42mac/mlx.h"
 #include "./src/libft/libft.h"
 #include "./src/printf/ft_printf.h"
 #include "./inc/colors.h"
@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <X11/Xlib.h>//Utilizada para la gestion del multihilo.
+//#include <X11/Xlib.h>//Utilizada para la gestion del multihilo.
 #define BUFFER_SIZE 5000
 #define BPP 64
 // STRUCTS
