@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 13:57:28 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/10 00:37:15 by ncolomer         ###   ########.fr       */
+/*   Created: 2022/07/14 11:53:14 by guortun-          #+#    #+#             */
+/*   Updated: 2022/08/18 12:27:10 by guortun-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
-char
-	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
-	if (!s)
-		return (NULL);
 	i = 0;
-	while (s[i])
+	while (s[i] != (char)c)
 	{
-		if (s[i] == (char)c)
-			return ((char*)(s + i));
+		if (!s[i])
+			return (NULL);
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char*)(s + i));
-	return (NULL);
+	return ((char *)&s[i]);
 }
+/*int main(void)
+{
+	printf("%s",strchr("tripoulle", 't' + 256));
+	printf("%s", ft_strchr("tripoulle",'t' + 256 ));
+			return (0);
+			}*/

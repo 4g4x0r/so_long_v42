@@ -1,67 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_moves.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/04 08:58:41 by guortun-          #+#    #+#             */
+/*   Updated: 2023/10/04 20:07:17 by guortun-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-char	*put_values(char *string, t_entity *entity)
+char	*put_values(char *string, t_en *en)
 {
-	char *copy;
+	char	*copy;
 
-	copy = ft_strdup(string);  // Create a copy of the original string
-	copy[8] = get_low(entity->value);
-	return copy;
+	copy = ft_strdup(string);
+	copy[8] = get_low(en->value);
+	return (copy);
 }
 
 char	get_low(char letter)
 {
 	if (letter >= 'A' && letter <= 'Z')
 	{
-		return letter + 32;
+		return (letter + 32);
 	}
 	else
-	{
-		// If the letter is not uppercase, it is returned as it is
-		return letter;
-	}
+		return (letter);
 }
 
-char	*get_direction_static(t_entity *entity, int coordx, int coordy)
+char	*get_direction_static(t_en *en, int coordx, int coordy)
 {
-	char *imgstep;
+	char	*imgstep;
 
-	imgstep = put_values("sprites/p_down_t.xpm", entity); // default
-	if (coordx == -1) // a
+	imgstep = put_values("sprites/p_down_t.xpm", en);
+	if (coordx == -1)
 	{
-		imgstep = put_values("sprites/p_left_t.xpm", entity);
+		imgstep = put_values("sprites/p_left_t.xpm", en);
 	}
-	else if (coordy == 1) // s
+	else if (coordy == 1)
 	{
-		imgstep = put_values("sprites/p_down_t.xpm", entity);
+		imgstep = put_values("sprites/p_down_t.xpm", en);
 	}
-	else if (coordx == 1) // d
+	else if (coordx == 1)
 	{
-		imgstep = put_values("sprites/p_right_t.xpm", entity);
+		imgstep = put_values("sprites/p_right_t.xpm", en);
 	}
-	else if (coordy == -1) // w
+	else if (coordy == -1)
 	{
-		imgstep = put_values("sprites/p_up_t.xpm", entity);
+		imgstep = put_values("sprites/p_up_t.xpm", en);
 	}
-	return imgstep;
+	return (imgstep);
 }
 
-
-void	init_player(t_in *fw, t_entity *entity, int coordx, int coordy)
+void	init_player(t_in *fw, t_en *en, int coordx, int coordy)
 {
-	fw->map->mapstruct[entity->y][entity->x] = '0';
-	if (fw->map->mapstruct[entity->y + coordy][entity->x + coordx] != 'E')
-	{
-		fw->map->mapstruct[entity->y + coordy][entity->x + coordx] = entity->value;
-	}
+	fw->map->mapstruct[en->y][en->x] = '0';
+	if (fw->map->mapstruct[en->y + coordy][en->x + coordx] != 'E')
+		fw->map->mapstruct[en->y + coordy][en->x + coordx] = en->value;
 }
 
-void	handle_move(t_in *fw, t_entity *entity, int coordx, int coordy){
-	init_player(fw, entity, coordx, coordy);
-	entity->x += coordx;
-	entity->y += coordy;
-	entity->ptr = mlx_xpm_file_to_image(fw->map->mlx,
-	get_direction_static(entity, coordx,coordy),&fw->map->width, &fw->map->height);//CARGA LA DIRECCION ESTATICA DEL JUGADOR.
+void	handle_move(t_in *fw, t_en *en, int coordx, int coordy)
+{
+	init_player(fw, en, coordx, coordy);
+	en->x += coordx;
+	en->y += coordy;
+	en->ptr = mlx_xpm_file_to_image(fw->map->mlx,
+			get_direction_static(en, coordx, coordy),
+			&fw->map->width, &fw->map->height);
 	mlx_do_sync(fw->map->mlx);
 	check_e(fw);
 }

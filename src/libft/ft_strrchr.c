@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 14:00:20 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/10 17:04:57 by ncolomer         ###   ########.fr       */
+/*   Created: 2022/07/14 11:57:55 by guortun-          #+#    #+#             */
+/*   Updated: 2022/07/14 11:59:37 by guortun-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char
-	*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	char		*ultimo;
+	char		buscar;
+	size_t		i;
 
-	i = 0;
-	while (s[i])
-		i++;
-	while (i >= 0)
+	ultimo = (char *)s;
+	buscar = (char)c;
+	i = ft_strlen(s);
+	while (i > 0)
 	{
-		if (s[i] == (char)c)
-			return ((char*)(s + i));
+		if (ultimo[i] == buscar)
+			return (ultimo + i);
 		i--;
 	}
-	return (NULL);
+	if (ultimo[i] == buscar)
+		return (ultimo);
+	return (0);
 }

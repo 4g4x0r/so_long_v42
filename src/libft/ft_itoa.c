@@ -3,59 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 16:26:33 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/14 11:48:50 by ncolomer         ###   ########.fr       */
+/*   Created: 2022/08/04 12:48:30 by guortun-          #+#    #+#             */
+/*   Updated: 2022/08/09 20:09:22 by guortun-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+static int	longitud(long aux)
 {
-	return ((nbr < 0) ? -nbr : nbr);
-}
+	int		i;
 
-static void
-	ft_strrev(char *str)
-{
-	size_t	length;
-	size_t	i;
-	char	tmp;
-
-	length = ft_strlen(str);
-	i = 0;
-	while (i < length / 2)
+	i = 1;
+	if (aux < 0)
 	{
-		tmp = str[i];
-		str[i] = str[length - i - 1];
-		str[length - i - 1] = tmp;
+		aux = aux * -1;
 		i++;
 	}
+	while (aux > 9)
+	{
+		aux /= 10;
+		i++;
+	}
+	return (i);
 }
 
-char
-	*ft_itoa(int n)
+static void	*mayorque(char *string, size_t n_long, int i)
 {
-	char	*str;
-	int		is_neg;
-	size_t	length;
-
-	is_neg = (n < 0);
-	if (!(str = ft_calloc(11 + is_neg, sizeof(*str))))
-		return (NULL);
-	if (n == 0)
-		str[0] = '0';
-	length = 0;
-	while (n != 0)
+	while (n_long > 0)
 	{
-		str[length++] = '0' + ft_abs(n % 10);
-		n = (n / 10);
+		string[i] = 48 + (n_long % 10);
+		n_long /= 10;
+		i--;
 	}
-	if (is_neg)
-		str[length] = '-';
-	ft_strrev(str);
-	return (str);
+	return (string);
+}
+
+char	*ft_itoa(int n)
+{
+	char		*string;
+	long		i;
+	long long	n_long;
+
+	n_long = (long long)n;
+	i = longitud(n_long);
+	string = (char *) malloc(sizeof(char) * (i + 1));
+	if (!string)
+		return (NULL);
+	string[i--] = '\0';
+	if (n_long == 0)
+	{
+		string[0] = 48;
+		return (string);
+	}
+	if (n_long < 0)
+	{
+		string[0] = '-';
+		n_long = n_long * -1;
+	}
+	string = mayorque(string, n_long, i);
+	return (string);
 }

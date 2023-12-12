@@ -3,42 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 17:09:44 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/14 11:24:49 by ncolomer         ###   ########.fr       */
+/*   Created: 2022/08/09 17:36:16 by guortun-          #+#    #+#             */
+/*   Updated: 2022/08/18 12:42:31 by guortun-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+void	ft_putnbr_fd(int n, int fd)
 {
-	return ((nbr < 0) ? -nbr : nbr);
-}
-
-void
-	ft_putnbr_fd(int n, int fd)
-{
-	char	str[13];
-	int		is_neg;
-	int		length;
-
-	is_neg = (n < 0);
-	ft_bzero(str, 13);
-	if (n == 0)
-		str[0] = '0';
-	length = 0;
-	while (n != 0)
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else
 	{
-		str[length++] = '0' + ft_abs(n % 10);
-		n = (n / 10);
+		if (n < 0)
+		{
+			ft_putchar_fd('-', fd);
+			n = n * -1;
+		}
+		if (n > 9)
+		{
+			ft_putnbr_fd(n / 10, fd);
+			n = n % 10;
+		}
+		ft_putchar_fd((n % 10) + '0', fd);
 	}
-	if (is_neg)
-		str[length] = '-';
-	else if (length > 0)
-		length--;
-	while (length >= 0)
-		write(fd, &str[length--], 1);
 }

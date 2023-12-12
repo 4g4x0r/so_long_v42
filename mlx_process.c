@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_process.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/11 19:53:29 by guortun-          #+#    #+#             */
+/*   Updated: 2023/12/12 01:35:19 by guortun-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	mlx_process(t_in *fw)
 {
 	fw->map->wall_ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/wall.xpm",
-	&fw->map->width, &fw->map->height);
-	fw->map->floor_ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/floor.xpm",
-	&fw->map->width, &fw->map->height);
+			&fw->map->width, &fw->map->height);
+	fw->map->floor_ptr = mlx_xpm_file_to_image(fw->map->mlx,
+			"sprites/floor.xpm", &fw->map->width, &fw->map->height);
 	fw->map->exit_ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/exit.xpm",
-	&fw->map->width, &fw->map->height);
+			&fw->map->width, &fw->map->height);
 	fw->map->coin_ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/coin.xpm",
-	&fw->map->width, &fw->map->height);
-	fw->player->ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/p_down_t.xpm",
-	&fw->map->width, &fw->map->height);
+			&fw->map->width, &fw->map->height);
+	fw->player->ptr = mlx_xpm_file_to_image(fw->map->mlx,
+			"sprites/p_down_t.xpm", &fw->map->width, &fw->map->height);
 	fw->map->moves = 0;
 	fw->map->coins_gained = 0;
 	handle_move(fw, fw->player, 0, 0);
@@ -24,7 +36,7 @@ void	set_image_ptr(t_in *fw, int y, int x, void **image_ptr)
 		*image_ptr = fw->map->wall_ptr;
 	else if (fw->map->mapstruct[y][x] == '0')
 		*image_ptr = fw->map->floor_ptr;
-	else if (fw->map->mapstruct[y][x] == 'P') // When adding new enemies, put their letter here to indicate they are on the floor layer
+	else if (fw->map->mapstruct[y][x] == 'P')
 		*image_ptr = fw->map->floor_ptr;
 	else if (fw->map->mapstruct[y][x] == 'E')
 	{
@@ -38,29 +50,25 @@ void	set_image_ptr(t_in *fw, int y, int x, void **image_ptr)
 		*image_ptr = fw->map->floor_ptr;
 }
 
-
 void	put_item_to_buffer(t_in *fw, int *buffer_data, int y, int x)
 {
-	int *image_data;
-	void *image_ptr;
-	int bpp;
-	int size_line;
-	int endian;
+	int		*image_data;
+	void	*image_ptr;
+	int		row;
+	int		col;
 
 	set_image_ptr(fw, y, x, &image_ptr);
 	if (image_ptr)
 	{
-		image_data = (int *)mlx_get_data_addr(image_ptr, &bpp, &size_line, &endian);
-		int row;
+		image_data = put_data(image_ptr);
 		row = 0;
 		while (row < BPP)
 		{
-			int col;
 			col = 0;
 			while (col < BPP)
 			{
-				buffer_data[(y * BPP + row) * (fw->map->columns * BPP) +
-				(x * BPP + col)] = image_data[row * BPP + col];
+				buffer_data[(y * BPP + row) * (fw->map->columns * BPP) + (
+						x * BPP + col)] = image_data[row * BPP + col];
 				col++;
 			}
 			row++;
@@ -70,18 +78,20 @@ void	put_item_to_buffer(t_in *fw, int *buffer_data, int y, int x)
 
 int	key_hook(int keycode, t_in *fw)
 {
-	if (keycode == 65307)
+	char	letter;
+
+	if (keycode == 53)
 		close_window_event(fw);
-	char letter;
 	letter = convert_keycode_to_letter(keycode);
-	ft_printf(YELLOW"\nYou pressed the %c key!"DEFAULT, letter);
-	if (keycode == 0x61 || keycode == 0x41 || keycode == 0) // Key 'a' or 'A' (the last one is for Mac!)
+	if (letter != '/')
+		ft_printf(YELLOW"\nYou pressed the %c key!"DEFAULT, letter);
+	if (keycode == 0)
 		handle_keys(fw, 'a');
-	else if (keycode == 0x73 || keycode == 0x53 || keycode == 1) // Key 's' or 'S'
+	else if (keycode == 1)
 		handle_keys(fw, 's');
-	else if (keycode == 0x64 || keycode == 0x44 || keycode == 2) // Key 'd' or 'D'
+	else if (keycode == 2)
 		handle_keys(fw, 'd');
-	else if (keycode == 0x77 || keycode == 0x57 || keycode == 13) // Key 'w' or 'W'
+	else if (keycode == 13)
 		handle_keys(fw, 'w');
 	else
 	{
@@ -93,10 +103,14 @@ int	key_hook(int keycode, t_in *fw)
 
 char	convert_keycode_to_letter(int keycode)
 {
-	if (keycode >= 65 && keycode <= 90)
-		return (char)keycode;  // ASCII codes for uppercase letters
-	else if (keycode >= 97 && keycode <= 122)
-		return (char)(keycode - 32);  // ASCII codes for lowercase letters, converted to uppercase
+	if (keycode == 0)
+		return ('A');
+	else if (keycode == 1)
+		return ('S');
+	else if (keycode == 2)
+		return ('D');
+	else if (keycode == 13)
+		return ('W');
 	else
-		return '\0';  // Null value to indicate an error
+		return ('/');
 }

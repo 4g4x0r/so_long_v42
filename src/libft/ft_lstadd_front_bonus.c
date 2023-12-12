@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 13:51:08 by guortun-          #+#    #+#             */
-/*   Updated: 2022/08/09 17:35:18 by guortun-         ###   ########.fr       */
+/*   Created: 2022/08/18 19:19:45 by guortun-          #+#    #+#             */
+/*   Updated: 2022/08/18 19:19:47 by guortun-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	return (c >= 32 && c <= 126);
+	if (new)
+	{
+		if (!lst)
+			*lst = new;
+		new->next = *lst;
+		*lst = new;
+	}
 }

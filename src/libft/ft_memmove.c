@@ -3,37 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 13:09:18 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/10 17:24:41 by ncolomer         ###   ########.fr       */
+/*   Created: 2022/07/04 16:37:50 by guortun-          #+#    #+#             */
+/*   Updated: 2022/08/18 12:35:29 by guortun-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void
-	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	i;
+	unsigned char	*aux1;
+	unsigned char	*aux2;
+	size_t			i;
 
-	if (!dst || !src)
-		return (NULL);
-	if (dst > src)
+	i = 0;
+	aux1 = (unsigned char *)dst;
+	aux2 = (unsigned char *)src;
+	if (aux1 > aux2)
 	{
-		i = (int)len - 1;
-		while (i >= 0)
-		{
-			*(char*)(dst + i) = *(char*)(src + i);
-			i--;
-		}
+		while (len--)
+			aux1[len] = aux2[len];
 	}
-	else
+	else if (aux1 < aux2)
 	{
-		i = 0;
-		while (i < (int)len)
+		while (i < len)
 		{
-			*(char*)(dst + i) = *(char*)(src + i);
+			aux1[i] = aux2[i];
 			i++;
 		}
 	}
