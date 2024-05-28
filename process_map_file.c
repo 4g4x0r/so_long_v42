@@ -1,23 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   process_map_file.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 01:51:25 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/12 02:04:56 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 int	check_file_extension(char *filename, char *extension)
 {
 	size_t	len_filename;
 	size_t	len_extension;
 	char	*ptr;
-
 	ptr = NULL;
 	len_filename = ft_strlen(filename);
 	len_extension = ft_strlen(extension);
@@ -35,14 +21,12 @@ int	check_file_extension(char *filename, char *extension)
 		exit(1);
 	}
 }
-
 int	line_counter(int fd)
 {
 	char	buffer[BUFFER_SIZE];
 	int		line;
 	ssize_t	bytes_read;
 	int		i;
-
 	i = 0;
 	line = 0;
 	bytes_read = read(fd, &buffer[i], 1);
@@ -59,11 +43,9 @@ int	line_counter(int fd)
 		error_msg("Error: Number of insufficient lines");
 	return (line);
 }
-
 int	map_validator(char *buffer, t_in *fw)
 {
 	static int	i;
-
 	if (i == 0 && i < fw->map->lines)
 	{
 		first_line_analyzer(buffer, fw);
@@ -83,13 +65,11 @@ int	map_validator(char *buffer, t_in *fw)
 	}
 	return (0);
 }
-
 int	process_line(int fd, t_in *fw)
 {
 	char	buffer[BUFFER_SIZE];
 	ssize_t	bytes_read;
 	int		i;
-
 	i = 0;
 	bytes_read = read(fd, &buffer[i], 1);
 	while ((bytes_read) > 0)
@@ -104,12 +84,10 @@ int	process_line(int fd, t_in *fw)
 		error_msg("Error reading file");
 	return (0);
 }
-
 int	process_map_file(t_in *fw)
 {
 	int	fd;
 	int	fd2;
-
 	fd = open(fw->map->map_name, O_RDONLY);
 	fw->map->lines = line_counter(fd);
 	close(fd);

@@ -1,21 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_utils_2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 19:40:41 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/11 19:52:10 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 int	last_line_analyzer(char *buffer, t_in *fw)
 {
 	int	a;
-
 	a = 0;
 	if (ft_strlen(buffer) != (size_t)fw->map->columns)
 	{
@@ -33,13 +19,11 @@ int	last_line_analyzer(char *buffer, t_in *fw)
 	}
 	return (0);
 }
-
 int	path_finder(t_in *fw)
 {
 	int	i;
 	int	path_exists;
 	int	**visited;
-
 	visited = (int **)ft_calloc(fw->map->lines, sizeof(int *));
 	i = 0;
 	while (i < fw->map->lines)
@@ -61,7 +45,6 @@ int	path_finder(t_in *fw)
 	visited = NULL;
 	return (path_exists);
 }
-
 int	dfs(int row, int col, int **visited, t_in *fw)
 {
 	if (row < 0 || row >= fw->map->lines || col < 0 || col >= fw->map->columns)
@@ -85,7 +68,6 @@ int	dfs(int row, int col, int **visited, t_in *fw)
 	}
 	return (0);
 }
-
 void	search_ens(t_in *fw, char letter, int e, int num)
 {
 	if (letter == 'P')
@@ -94,7 +76,6 @@ void	search_ens(t_in *fw, char letter, int e, int num)
 		fw->player->x = num;
 	}
 }
-
 int	is_en(t_in *fw, int y, int x, int first_time)
 {
 	if (fw->map->mapstruct[y][x] == 'P' && first_time == 2)

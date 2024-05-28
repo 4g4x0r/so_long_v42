@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mlx_process.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 19:53:29 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/12 01:35:19 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 int	mlx_process(t_in *fw)
 {
 	fw->map->wall_ptr = mlx_xpm_file_to_image(fw->map->mlx, "sprites/wall.xpm",
@@ -29,7 +16,6 @@ int	mlx_process(t_in *fw)
 	handle_move(fw, fw->player, 0, 0);
 	return (0);
 }
-
 void	set_image_ptr(t_in *fw, int y, int x, void **image_ptr)
 {
 	if (fw->map->mapstruct[y][x] == '1')
@@ -49,14 +35,12 @@ void	set_image_ptr(t_in *fw, int y, int x, void **image_ptr)
 	else
 		*image_ptr = fw->map->floor_ptr;
 }
-
 void	put_item_to_buffer(t_in *fw, int *buffer_data, int y, int x)
 {
 	int		*image_data;
 	void	*image_ptr;
 	int		row;
 	int		col;
-
 	set_image_ptr(fw, y, x, &image_ptr);
 	if (image_ptr)
 	{
@@ -75,11 +59,9 @@ void	put_item_to_buffer(t_in *fw, int *buffer_data, int y, int x)
 		}
 	}
 }
-
 int	key_hook(int keycode, t_in *fw)
 {
 	char	letter;
-
 	if (keycode == 53)
 		close_window_event(fw);
 	letter = convert_keycode_to_letter(keycode);
@@ -100,7 +82,6 @@ int	key_hook(int keycode, t_in *fw)
 	}
 	return (0);
 }
-
 char	convert_keycode_to_letter(int keycode)
 {
 	if (keycode == 0)

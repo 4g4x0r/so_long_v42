@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 17:11:23 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/12 17:18:16 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
 # include "./mlx42mac/mlx.h"
 # include "./src/libft/libft.h"
 # include "./src/printf/ft_printf.h"
@@ -48,7 +35,6 @@ typedef struct s_map{
 	int		coins_gained;
 	int		endian;
 }				t_map;
-
 typedef struct s_en{
 	void	*ptr;
 	int		width;
@@ -60,13 +46,10 @@ typedef struct s_en{
 	int		stepanimation;
 	char	value;
 }				t_en;
-
 typedef struct s_in{
 	t_map	*map;
 	t_en	*player;
 }				t_in;
-
-/*FUNCIONES DE MAPA*/
 void	error_msg(char *msg);
 void	ft_set_variables(t_in *fw);
 void	check_argc(int argc);
@@ -83,7 +66,6 @@ int		last_line_analyzer(char *buffer, t_in *fw);
 int		search_items(char item, t_in *fw);
 int		path_finder(t_in *fw);
 int		dfs(int row, int col, int **visited, t_in *fw);
-/*FUNCIONES DE GESTION DE GRÁFICOS*/
 void	free_map_struct(t_in *fw);
 int		mlx_process(t_in *fw);
 void	set_image_ptr(t_in *fw, int y, int x, void **image_ptr);
@@ -101,7 +83,6 @@ int		draw_character(t_in *fw, t_en *en, int coord_x, int coord_y);
 int		close_window_event(t_in *fw);
 int		expose_window_event(t_in *fw);
 int		*put_data(void *image_ptr);
-/*FUNCIONES DE GESTION DE MOVIMIENTOS*/
 int		check_e(t_in *fw);
 void	handle_move(t_in *fw, t_en *en, int coord_x, int coord_y);
 int		handle_keys(t_in *fw, char key);

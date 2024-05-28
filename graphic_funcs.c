@@ -1,23 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   graphic_funcs.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 17:37:18 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/11 18:45:27 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 int	loop_hook(t_in *fw)
 {
 	put_imgs(fw);
 	return (0);
 }
-
 void	check_coins(t_in *fw)
 {
 	if (fw->map->coins_gained >= fw->map->coins)
@@ -28,11 +14,9 @@ void	check_coins(t_in *fw)
 			fw->map->exit_ptr, fw->map->exit_x * BPP, fw->map->exit_y * BPP);
 	}
 }
-
 void	free_map_struct(t_in *fw)
 {
 	int	i;
-
 	i = 0;
 	while (i <= fw->map->lines)
 	{
@@ -45,12 +29,10 @@ void	free_map_struct(t_in *fw)
 	free(fw->map->mapstruct);
 	exit(1);
 }
-
 void	process_buffer_data(t_in *fw, int *buffer_data)
 {
 	int	y;
 	int	x;
-
 	y = 0;
 	x = 0;
 	while (y < fw->map->lines)
@@ -64,7 +46,6 @@ void	process_buffer_data(t_in *fw, int *buffer_data)
 		}
 	}
 }
-
 void	put_imgs(t_in *fw)
 {
 	void	*buffer_image;
@@ -72,7 +53,6 @@ void	put_imgs(t_in *fw)
 	int		size_line;
 	int		endian;
 	int		*buffer_data;
-
 	buffer_image = mlx_new_image(fw->map->mlx, fw->map->columns * BPP,
 			fw->map->lines * BPP);
 	buffer_data = (int *)mlx_get_data_addr(buffer_image, &bpp, &size_line,

@@ -1,23 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 19:08:26 by guortun-          #+#    #+#             */
-/*   Updated: 2023/10/04 08:22:47 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
-
 static char	**ft_alloc_split(char const *s, char c)
 {
 	size_t	i;
 	char	**split;
 	size_t	total;
-
 	i = 0;
 	total = 0;
 	while (s[i])
@@ -31,11 +17,9 @@ static char	**ft_alloc_split(char const *s, char c)
 		return (NULL);
 	return (split);
 }
-
 void	*ft_free_all_split_alloc(char **split, size_t elts)
 {
 	size_t	i;
-
 	i = 0;
 	while (i < elts)
 	{
@@ -45,7 +29,6 @@ void	*ft_free_all_split_alloc(char **split, size_t elts)
 	free(split);
 	return (NULL);
 }
-
 static void	*ft_split_range(char **split, char const *s, t_split_next *st,
 		t_split_next *lt)
 {
@@ -55,13 +38,11 @@ static void	*ft_split_range(char **split, char const *s, t_split_next *st,
 	lt->length++;
 	return (split);
 }
-
 static void	*ft_split_by_char(char **split, char const *s, char c)
 {
 	size_t			i;
 	t_split_next	st;
 	t_split_next	lt;
-
 	i = 0;
 	lt.length = 0;
 	lt.start = 0;
@@ -84,11 +65,9 @@ static void	*ft_split_by_char(char **split, char const *s, char c)
 	split[lt.length] = 0;
 	return (split);
 }
-
 char	**ft_split(char const *s, char c)
 {
 	char	**split;
-
 	split = ft_alloc_split(s, c);
 	if (!(split))
 		return (NULL);

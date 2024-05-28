@@ -1,41 +1,24 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 18:56:56 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/12 02:01:36 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 void	error_msg(char *msg)
 {
 	perror(msg);
 	exit(1);
 }
-
 int	*put_data(void *image_ptr)
 {
 	int		*image_data;
 	int		bpp;
 	int		endian;
 	int		size_line;
-
 	size_line = 0;
 	image_data = (int *)mlx_get_data_addr(image_ptr, &bpp, &size_line, &endian);
 	return (image_data);
 }
-
 int	main(int argc, char **argv)
 {
 	t_map	c;
 	t_en	player;
 	t_in	fw;
-
 	fw.map = &c;
 	fw.player = &player;
 	fw.player->value = 'P';

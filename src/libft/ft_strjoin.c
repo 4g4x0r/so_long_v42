@@ -1,22 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/09 18:00:20 by guortun-          #+#    #+#             */
-/*   Updated: 2022/08/09 20:26:47 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
-
 char	*ft_strcat(char *dest, char *src)
 {
 	int	i;
 	int	j;
-
 	i = 0;
 	j = 0;
 	while (dest[i] != 0)
@@ -31,7 +17,6 @@ char	*ft_strcat(char *dest, char *src)
 	dest [i + j] = '\0';
 	return (dest);
 }
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*aux1;
@@ -39,7 +24,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*con;
 	size_t	i;
 	size_t	j;
-
 	if (!s1)
 		return (NULL);
 	i = 0;

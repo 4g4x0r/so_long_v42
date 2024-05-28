@@ -1,22 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   player_move.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 01:35:38 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/12 01:50:30 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 int	handle_keys(t_in *fw, char key)
 {
 	int	coord_x;
 	int	coord_y;
-
 	coord_x = 0;
 	coord_y = 0;
 	if (key == 'a')
@@ -29,7 +15,6 @@ int	handle_keys(t_in *fw, char key)
 		coord_y = -1;
 	return (check_move(fw, coord_x, coord_y));
 }
-
 int	check_move(t_in *fw, int coord_x, int coord_y)
 {
 	if (fw->map->mapstruct[fw->player->y + coord_y]
@@ -57,7 +42,6 @@ int	check_move(t_in *fw, int coord_x, int coord_y)
 	}
 	return (1);
 }
-
 int	check_e(t_in *fw)
 {
 	if (fw->player->y == fw->map->exit_y && fw->player->x == fw->map->exit_x)
@@ -73,7 +57,6 @@ int	check_e(t_in *fw)
 	}
 	return (0);
 }
-
 void	ft_set_variables(t_in *fw)
 {
 	fw->map->coins = 0;

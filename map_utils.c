@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: guortun- <guortun-@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 19:19:49 by guortun-          #+#    #+#             */
-/*   Updated: 2023/12/11 19:38:12 by guortun-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
-
 void	check_argc(int argc)
 {
 	if (argc < 2)
@@ -20,11 +7,9 @@ void	check_argc(int argc)
 		exit(1);
 	}
 }
-
 int	check_line(char *buffer, int *i, t_in *fw)
 {
 	static int	e;
-
 	buffer[*i] = '\0';
 	map_validator(buffer, fw);
 	fw->map->mapstruct[e] = (char *)malloc(sizeof(char) * (
@@ -35,11 +20,9 @@ int	check_line(char *buffer, int *i, t_in *fw)
 	*i = 0;
 	return (0);
 }
-
 int	first_line_analyzer(char *buffer, t_in *fw)
 {
 	int	a;
-
 	fw->map->columns = ft_strlen(buffer);
 	a = 0;
 	while (buffer[a] != '\0')
@@ -58,12 +41,10 @@ int	first_line_analyzer(char *buffer, t_in *fw)
 	}
 	return (0);
 }
-
 int	body_line_analyzer(char *buffer, t_in *fw)
 {
 	int			a;
 	static int	e;
-
 	a = 0;
 	if (ft_strlen(buffer) != (size_t)fw->map->columns || buffer[a] != '1'
 		|| buffer[(fw->map->columns - 1)] != '1')
@@ -81,7 +62,6 @@ int	body_line_analyzer(char *buffer, t_in *fw)
 	e++;
 	return (0);
 }
-
 int	search_items(char item, t_in *fw)
 {
 	if (item == 'C')
